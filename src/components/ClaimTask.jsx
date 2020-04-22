@@ -15,6 +15,28 @@ const ClaimTask = props => {
     getConfirmedTasks(dispatch)
   }, [dispatch])
 
+  const claimTask = async event => {
+    let headers = JSON.parse(localStorage.getItem('J-tockAuth-Storage'))
+    let id = event.target.parentElement.dataset.id
+    try {
+      let response = await axios.put(
+        `/tasks/${id}`,
+        { activity: 'claimed' },
+        { headers: headers }
+      )
+      if (response.status === 200)
+        dispatch({
+          type: 'GREETING',
+          payload: 'You have claimed the task!'
+        })
+    } catch (error) {
+      dispatch({
+        type: 'GREETING',
+        payload: error.message
+      })
+    }
+  }
+
   if (props.showHelpMap) {
     mapDisplay = <DisplayMap />
   }
