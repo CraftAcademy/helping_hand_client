@@ -10,7 +10,7 @@ const Login = props => {
   let login
   if (!authenticated) {
     login = (
-      <Form id='login-form' onSubmit={event => onLogin(event, dispatch)}>
+      <Form id='login-form' onSubmit={(event) => onLogin(event, dispatch)}>
         <Form.Field>
           <input
             id='email'
@@ -49,5 +49,4 @@ const Login = props => {
     </>
   )
 }
-
 export default Login
